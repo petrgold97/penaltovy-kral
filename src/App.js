@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const YOUTUBE_EMBED_URL = "https://www.youtube.com/watch?v=dPC67RJ-bD4"; // Replace this
+const YOUTUBE_EMBED_URL = "https://www.youtube.com/watch?v=fqEoVf3k_bk"; // Replace this
 const GOOGLE_SHEET_API = "https://opensheet.elk.sh/1MP-9NStIwl3CWiK9MKrf9uHs9I1zTVjgCNFd1hVIkho/Sheet1"; // Your actual sheet
 
 function App() {
@@ -77,9 +77,8 @@ function App() {
             {currentShooters.map((shooter, i) => (
               <div className="shooter" key={i}>
                 <p><strong>{shooter.name}</strong> (kope na: {shooter.side})</p>
-                <p>Kolo: {shooter.round}</p>
                 <p>
-                  Stav: {shooter.buyback === "yes" ? "Má šanci" : "Vyřazen"}
+                  Vykoupen: {shooter.buyback === "yes" ? "Ne" : "Ano"}
                 </p>
               </div>
             ))}
