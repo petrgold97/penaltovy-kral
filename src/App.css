@@ -11,16 +11,23 @@
 .layout {
   display: flex;
   gap: 20px;
+  align-items: flex-start;
+}
+
+/* 👇 Make video and info equal width */
+.livestream {
+  flex: 1;
 }
 
 .livestream iframe {
-  width: 600px;
-  height: 350px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
   border-radius: 12px;
 }
 
 .info {
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -36,8 +43,9 @@
   margin-bottom: 10px;
 }
 
+/* ❌ Remove sponsor carousel styles */
 .carousel {
-  animation: rotateSponsors 25s linear infinite;
+  display: none;
 }
 
 @keyframes rotateSponsors {
