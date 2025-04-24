@@ -1,52 +1,52 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const YOUTUBE_EMBED_URL = "https://www.youtube.com/watch?v=fqEoVf3k_bk"; // Replace this
-const GOOGLE_SHEET_API = "https://opensheet.elk.sh/1MP-9NStIwl3CWiK9MKrf9uHs9I1zTVjgCNFd1hVIkho/Sheet1"; // Your actual sheet
+const YOUTUBE_EMBED_URL = "https://www.youtube.com/embed/fqEoVf3k_bk"; // ✅ Proper embed URL
+const GOOGLE_SHEET_API = "https://opensheet.elk.sh/1MP-9NStIwl3CWiK9MKrf9uHs9I1zTVjgCNFd1hVIkho/Sheet1";
 
 function App() {
   const [currentShooters, setCurrentShooters] = useState([]);
   const [nextShooters, setNextShooters] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [activeCount, setActiveCount] = useState(0);
+  const [currentRound, setCurrentRound] = useState("");
 
   useEffect(() => {
     fetch(GOOGLE_SHEET_API)
       .then((res) => res.json())
       .then((entries) => {
-        console.log("Fetched entries:", entries);
-
         if (!Array.isArray(entries)) {
           console.error("Expected array but got:", entries);
           return;
         }
 
-        // 🔁 Map with correct keys
-        const mapped = entries.map((item) => ({
-          name: item.Name,
-          round: item.Round,
-          buyback: item.Buyback,
-          status: item.Status,
-          side: item.Side, // Assuming Side column in Google Sheets (A or B)
-          missed: item.Missed, // Assuming Missed column for penalty tracking
-        }));
+        // Get the current round from a row where current_round is set
+        const roundRow = entries.find((e) => e.current_round);
+        if (roundRow && roundRow.current_round) {
+          setCurrentRound(roundRow.current_round);
+        }
+
+        const mapped = entries
+          .filter((item) => item.Name) // Only valid players
+          .map((item) => ({
+            name: item.Name,
+            round: item.Round,
+            buyback: item.Buyback,
+            status: item.Status?.toLowerCase(),
+            side: item.Side,
+            missed: item.Missed,
+          }));
 
         setTotalCount(mapped.length);
 
-        // ✅ Active players (Buyback = yes)
         const active = mapped.filter((e) => e.buyback?.toLowerCase() === "yes");
         setActiveCount(active.length);
 
-        // ✅ Current players (Status = 1 or 2)
-        const current = mapped.filter((e) =>
-          ["1", "2"].includes(e.status?.toString().trim())
-        );
-        setCurrentShooters(current.slice(0, 2)); // Only show two players
+        const current = mapped.filter((e) => e.status === "shooting");
+        setCurrentShooters(current.slice(0, 2));
 
-        // ✅ Next shooters after last '2'
-        const lastIndex = mapped.findIndex((e) => e.status?.toString().trim() === "2");
-        const next = mapped.slice(lastIndex + 1, lastIndex + 6); // Show the next 6 players
-        setNextShooters(next);
+        const next = mapped.filter((e) => e.status === "next");
+        setNextShooters(next.slice(0, 4));
       })
       .catch((err) => {
         console.error("Fetch error:", err);
@@ -58,6 +58,7 @@ function App() {
       <div className="title">
         <h1>O penaltového krále MS kraje, 16. ročník, Hukvaldy</h1>
         <p>Celkový počet kopajích: {totalCount}, ve hře: {activeCount}</p>
+        <h2>Aktuální kolo: {currentRound}</h2>
       </div>
 
       <div className="layout">
@@ -77,9 +78,7 @@ function App() {
             {currentShooters.map((shooter, i) => (
               <div className="shooter" key={i}>
                 <p><strong>{shooter.name}</strong> (kope na: {shooter.side})</p>
-                <p>
-                  Vykoupen: {shooter.buyback === "yes" ? "Ne" : "Ano"}
-                </p>
+                <p>Vykoupen: {shooter.buyback === "yes" ? "Ne" : "Ano"}</p>
               </div>
             ))}
           </div>
