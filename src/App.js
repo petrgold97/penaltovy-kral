@@ -5,7 +5,6 @@ const YOUTUBE_EMBED_URL = "https://www.youtube.com/watch?v=dPC67RJ-bD4"; // Repl
 const GOOGLE_SHEET_API = "https://opensheet.elk.sh/1MP-9NStIwl3CWiK9MKrf9uHs9I1zTVjgCNFd1hVIkho/Sheet1"; // Your actual sheet
 
 function App() {
-  const [participants, setParticipants] = useState([]);
   const [currentShooters, setCurrentShooters] = useState([]);
   const [nextShooters, setNextShooters] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -32,7 +31,6 @@ function App() {
           missed: item.Missed, // Assuming Missed column for penalty tracking
         }));
 
-        setParticipants(mapped);
         setTotalCount(mapped.length);
 
         // ✅ Active players (Buyback = yes)
@@ -81,7 +79,7 @@ function App() {
                 <p><strong>{shooter.name}</strong> (kopa na: {shooter.side})</p>
                 <p>Kolo: {shooter.round}</p>
                 <p>
-                  Vykoupen: {shooter.buyback === "yes" ? "Možnost vykoupení" : "Vykoupen"}
+                  Stav: {shooter.buyback === "yes" ? "Má šanci" : "Vyřazen"}
                 </p>
               </div>
             ))}
