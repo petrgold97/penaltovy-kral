@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const YOUTUBE_EMBED_URL = "https://www.youtube.com/embed/dPC67RJ-bD4"; // Make sure it's the EMBED version
+const YOUTUBE_EMBED_URL = "https://www.youtube.com/embed/dPC67RJ-bD4"; // Proper embed URL
 const GOOGLE_SHEET_API = "https://opensheet.elk.sh/1MP-9NStIwl3CWiK9MKrf9uHs9I1zTVjgCNFd1hVIkho/Sheet1";
 
 function App() {
@@ -14,18 +14,14 @@ function App() {
     fetch(GOOGLE_SHEET_API)
       .then((res) => res.json())
       .then((entries) => {
-        console.log("Fetched entries:", entries);
-
-        if (!Array.isArray(entries)) {
-          console.error("Expected array but got:", entries);
-          return;
-        }
+        if (!Array.isArray(entries)) return;
 
         const mapped = entries.map((item) => ({
           name: item.Name,
           round: item.Round,
           buyback: item.Buyback,
           status: item.Status,
+          side: item.Side || "",
         }));
 
         setTotalCount(mapped.length);
@@ -33,18 +29,16 @@ function App() {
         const active = mapped.filter((e) => e.buyback?.toLowerCase() === "yes");
         setActiveCount(active.length);
 
-        const current = mapped.filter((e) =>
-          ["1", "2"].includes(e.status?.toString().trim())
-        );
+        const current = mapped
+          .filter((e) => ["1", "2"].includes(e.status?.toString().trim()))
+          .slice(0, 2); // only 2 current players
         setCurrentShooters(current);
 
         const lastIndex = mapped.findIndex((e) => e.status?.toString().trim() === "2");
-        const next = mapped.slice(lastIndex + 1, lastIndex + 11);
+        const next = mapped.slice(lastIndex + 1, lastIndex + 7); // 6 next shooters
         setNextShooters(next);
       })
-      .catch((err) => {
-        console.error("Fetch error:", err);
-      });
+      .catch(console.error);
   }, []);
 
   return (
@@ -71,10 +65,7 @@ function App() {
             {currentShooters.map((shooter, i) => (
               <div className="shooter" key={i}>
                 <p><strong>{shooter.name}</strong></p>
-                <p>Kolo: {shooter.round}</p>
-                <p>
-                  Stav: {shooter.buyback === "yes" ? "Má šanci" : "Vyřazen"}
-                </p>
+                <p>Kope na: {shooter.side?.toUpperCase() || "-"}</p>
               </div>
             ))}
           </div>
@@ -91,13 +82,12 @@ function App() {
 
           <div className="sponsors">
             <h2>Sponzoři</h2>
-            <div className="carousel">
-              <p>Sponsor 1</p>
-              <p>Sponsor 2</p>
-              <p>Sponsor 3</p>
-              <p>Sponsor 4</p>
-              <p>Sponsor 5</p>
-            </div>
+            <ul>
+              <li>Firma A</li>
+              <li>Firma B</li>
+              <li>Firma C</li>
+              <li>Firma D</li>
+            </ul>
           </div>
         </div>
       </div>
