@@ -5,7 +5,6 @@ const YOUTUBE_EMBED_URL = "https://www.youtube.com/watch?v=dPC67RJ-bD4"; // Repl
 const GOOGLE_SHEET_API = "https://opensheet.elk.sh/1MP-9NStIwl3CWiK9MKrf9uHs9I1zTVjgCNFd1hVIkho/Sheet1"; // Replace this with your actual Google Sheets API
 
 function App() {
-  const [participants, setParticipants] = useState([]);
   const [currentShooters, setCurrentShooters] = useState([]);
   const [nextShooters, setNextShooters] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -32,7 +31,6 @@ function App() {
           missed: item.Missed || 0, // Track number of missed penalties
         }));
 
-        setParticipants(mapped);
         setTotalCount(mapped.length);
 
         // ✅ Active players (Buyback = yes)
