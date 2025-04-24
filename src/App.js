@@ -76,7 +76,7 @@ function App() {
             {currentShooters.length === 0 && <p>Žádní aktuální hráči</p>}
             {currentShooters.map((shooter, i) => (
               <div className="shooter" key={i}>
-                <p><strong>{shooter.name}</strong> (kopa na: {shooter.side})</p>
+                <p><strong>{shooter.name}</strong> (kope na: {shooter.side})</p>
                 <p>Kolo: {shooter.round}</p>
                 <p>
                   Stav: {shooter.buyback === "yes" ? "Má šanci" : "Vyřazen"}
@@ -91,7 +91,7 @@ function App() {
             <ul>
               {nextShooters.map((player, i) => (
                 <li key={i}>
-                  {player.name} (kopa na: {player.side})
+                  {player.name} (kope na: {player.side})
                 </li>
               ))}
             </ul>
