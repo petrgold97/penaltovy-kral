@@ -5,7 +5,7 @@ const YOUTUBE_EMBED_URL = "https://www.youtube.com/embed/dPC67RJ-bD4"; // Must u
 const GOOGLE_SHEET_API = "https://opensheet.elk.sh/1MP-9NStIwl3CWiK9MKrf9uHs9I1zTVjgCNFd1hVIkho/Sheet1";
 
 function App() {
-  const [participants, setParticipants] = useState([]);
+  // const [participants, setParticipants] = useState([]);
   const [currentShooters, setCurrentShooters] = useState([]);
   const [nextShooters, setNextShooters] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
