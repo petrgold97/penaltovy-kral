@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const YOUTUBE_EMBED_URL = "https://www.youtube.com/watch?v=dPC67RJ-bD4"; // Replace this
-const GOOGLE_SHEET_API = "https://opensheet.elk.sh/1MP-9NStIwl3CWiK9MKrf9uHs9I1zTVjgCNFd1hVIkho/Sheet1"; // Your actual sheet
+const YOUTUBE_EMBED_URL = "https://www.youtube.com/watch?v=dPC67RJ-bD4"; // Replace this with your actual YouTube URL
+const GOOGLE_SHEET_API = "https://opensheet.elk.sh/1MP-9NStIwl3CWiK9MKrf9uHs9I1zTVjgCNFd1hVIkho/Sheet1"; // Replace this with your actual Google Sheets API
 
 function App() {
   const [participants, setParticipants] = useState([]);
@@ -22,14 +22,14 @@ function App() {
           return;
         }
 
-        // 🔁 Map with correct keys
+        // 🔁 Map with correct keys and track missed penalties
         const mapped = entries.map((item) => ({
           name: item.Name,
           round: item.Round,
           buyback: item.Buyback,
           status: item.Status,
-          side: item.Side, // Assuming Side column in Google Sheets (A or B)
-          missed: item.Missed, // Assuming Missed column for penalty tracking
+          side: item.Side, // "A" or "B"
+          missed: item.Missed || 0, // Track number of missed penalties
         }));
 
         setParticipants(mapped);
@@ -39,15 +39,12 @@ function App() {
         const active = mapped.filter((e) => e.buyback?.toLowerCase() === "yes");
         setActiveCount(active.length);
 
-        // ✅ Current players (Status = 1 or 2)
-        const current = mapped.filter((e) =>
-          ["1", "2"].includes(e.status?.toString().trim())
-        );
-        setCurrentShooters(current.slice(0, 2)); // Only show two players
+        // ✅ Current players (Status = 1 or 2, but only show 2 players who are actively kicking)
+        const current = mapped.filter((e) => e.status === "1");
+        setCurrentShooters(current.slice(0, 2)); // Only show the first two players kicking
 
-        // ✅ Next shooters after last '2'
-        const lastIndex = mapped.findIndex((e) => e.status?.toString().trim() === "2");
-        const next = mapped.slice(lastIndex + 1, lastIndex + 6); // Show the next 6 players
+        // ✅ Next shooters (Status = 2) - show 2 preparing players
+        const next = mapped.filter((e) => e.status === "2").slice(0, 2); // Show the next two players preparing
         setNextShooters(next);
       })
       .catch((err) => {
@@ -78,10 +75,10 @@ function App() {
             {currentShooters.length === 0 && <p>Žádní aktuální hráči</p>}
             {currentShooters.map((shooter, i) => (
               <div className="shooter" key={i}>
-                <p><strong>{shooter.name}</strong> (kopa na: {shooter.side})</p>
+                <p><strong>{shooter.name}</strong> (Kopa na: {shooter.side})</p>
                 <p>Kolo: {shooter.round}</p>
                 <p>
-                  Stav: {shooter.buyback === "yes" ? "Má šanci" : "Vyřazen"}
+                  Stav: {shooter.missed < 2 ? "Má šanci" : "Vyřazen"}
                 </p>
               </div>
             ))}
@@ -92,14 +89,14 @@ function App() {
             {nextShooters.length === 0 && <p>Žádní další hráči</p>}
             <ul>
               {nextShooters.map((player, i) => (
-                <li key={i}>{player.name} (kopa na: {player.side})</li>
+                <li key={i}>{player.name} (Kopa na: {player.side})</li>
               ))}
             </ul>
           </div>
 
           <div className="sponsors">
             <h2>Sponzoři</h2>
-            <div className="static-sponsors">
+            <div className="carousel">
               <p>Sponsor 1</p>
               <p>Sponsor 2</p>
               <p>Sponsor 3</p>
