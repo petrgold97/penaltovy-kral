@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 const YOUTUBE_EMBED_URL = "https://www.youtube.com/embed/fqEoVf3k_bk";
-const GOOGLE_SHEET_API =
-  "https://opensheet.elk.sh/1MP-9NStIwl3CWiK9MKrf9uHs9I1zTVjgCNFd1hVIkho/Sheet1";
+const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbyMTQeB-jQROt9qYp2ust5PQBda2jlANxdCqDMaY_46rjhay1JYbHT1Wwvg3ah8jBCrTQ/exec";
 
 function App() {
   const [currentShooters, setCurrentShooters] = useState([]);
