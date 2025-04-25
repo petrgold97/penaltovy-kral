@@ -46,7 +46,7 @@ p {
 }
 
 .livestream iframe {
-  width: 800px;
+  width: 100%;
   height: 800px; /* Increased height */
   border-radius: 12px;
 }
