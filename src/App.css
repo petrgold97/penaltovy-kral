@@ -112,8 +112,8 @@ p {
 }
 
 .carousel img {
-  width: 180px;
-  height: 180px;
+  width: 1500px;
+  height: 150px;
   max-width: 100%;
   object-fit: contain;
   flex-shrink: 0;
