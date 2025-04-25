@@ -1,11 +1,33 @@
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #fafafa;
+}
+
 .app {
-  font-family: sans-serif;
   padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .title {
   text-align: center;
   margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+p {
+  font-size: 1.1em;
 }
 
 .layout {
@@ -20,8 +42,7 @@
 
 .livestream iframe {
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
+  height: 400px;
   border-radius: 12px;
 }
 
@@ -32,18 +53,19 @@
   gap: 20px;
 }
 
-.current-shooters, .next-shooters {
+.current-shooters,
+.next-shooters {
   background: #f0f0f0;
-  padding: 10px;
+  padding: 15px;
   border-radius: 12px;
 }
 
 .shooter {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .next-shooters ul {
-  list-style: none; /* ❌ Remove bullets */
+  list-style: none;
   padding: 0;
   margin: 0;
 }
@@ -63,8 +85,13 @@
 
 .carousel img {
   width: 150px;
-  height: auto;
+  height: 150px;
   border-radius: 12px;
   object-fit: cover;
   flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.carousel img:hover {
+  transform: scale(1.1);
 }
