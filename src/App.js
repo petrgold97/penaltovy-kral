@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const YOUTUBE_EMBED_URL = "https://www.youtube.com/embed/fqEoVf3k_bk";
+const YOUTUBE_EMBED_URL = "https://www.youtube.com/embed/fqEoVf3k_bk"; // ✅ Proper embed URL
 const GOOGLE_SHEET_API = "https://opensheet.elk.sh/1MP-9NStIwl3CWiK9MKrf9uHs9I1zTVjgCNFd1hVIkho/Sheet1";
 
 function App() {
@@ -11,17 +11,19 @@ function App() {
   const [activeCount, setActiveCount] = useState(0);
   const [currentRound, setCurrentRound] = useState("");
 
-  const fetchData = () => {
-    fetch(GOOGLE_SHEET_API)
-      .then((res) => res.json())
-      .then((entries) => {
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch(GOOGLE_SHEET_API);
+        const entries = await res.json();
+
         if (!Array.isArray(entries)) {
           console.error("Expected array but got:", entries);
           return;
         }
 
         const roundRow = entries.find((e) => e.current_round);
-        if (roundRow && roundRow.current_round) {
+        if (roundRow?.current_round) {
           setCurrentRound(roundRow.current_round);
         }
 
@@ -46,16 +48,12 @@ function App() {
 
         const next = mapped.filter((e) => e.status === "next");
         setNextShooters(next.slice(0, 4));
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error("Fetch error:", err);
-      });
-  };
+      }
+    }
 
-  useEffect(() => {
     fetchData();
-    const interval = setInterval(fetchData, 5000); // 🔁 Every 5 seconds
-    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -90,26 +88,26 @@ function App() {
 
           <div className="next-shooters">
             <h2>Připraví se</h2>
-            <div className="names">
-              {nextShooters.length === 0 && <p>Žádní další hráči</p>}
+            {nextShooters.length === 0 && <p>Žádní další hráči</p>}
+            <ul>
               {nextShooters.map((player, i) => (
-                <span key={i}>
+                <li key={i}>
                   {player.name} (kope na: {player.side})
-                </span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </div>
 
-      <div className="sponsors-carousel">
+      <div className="sponsors">
         <h2>Sponzoři</h2>
         <div className="carousel">
-          <div className="carousel-track">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <img key={i} src={`/sponsor${i}.png`} alt={`Sponsor ${i}`} />
-            ))}
-          </div>
+          <img src="https://via.placeholder.com/150?text=Sponsor+1" alt="Sponsor 1" />
+          <img src="https://via.placeholder.com/150?text=Sponsor+2" alt="Sponsor 2" />
+          <img src="https://via.placeholder.com/150?text=Sponsor+3" alt="Sponsor 3" />
+          <img src="https://via.placeholder.com/150?text=Sponsor+4" alt="Sponsor 4" />
+          <img src="https://via.placeholder.com/150?text=Sponsor+5" alt="Sponsor 5" />
         </div>
       </div>
     </div>
