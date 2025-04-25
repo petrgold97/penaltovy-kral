@@ -98,7 +98,7 @@ function App() {
             <ul>
               {nextShooters.map((player, i) => (
                 <li key={i} className="next-shooter-item">
-                  Č.{shooter.number} - {player.name} (branka: {player.side})
+                  Č.{player.number} - {player.name} (branka: {player.side})
                 </li>
               ))}
             </ul>
