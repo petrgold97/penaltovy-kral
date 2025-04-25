@@ -58,7 +58,7 @@ function App() {
   return (
     <div className="app">
       <div className="title">
-        <h1>O penaltového krále MS kraje, 16. ročník, Hukvaldy</h1>
+        <h1>O penaltového krále MS kraje 2025</h1>
         <div className="title-info">
           <h2>
             Celkový počet kopajích: {totalCount}, ve hře: {activeCount}
@@ -84,7 +84,7 @@ function App() {
             {currentShooters.map((shooter, i) => (
               <div className="shooter" key={i}>
                 <p>
-                  <strong>{shooter.name}</strong> (kope na: {shooter.side})
+                  <strong>{shooter.name}</strong> branka: {shooter.side})
                 </p>
                 <p>Vykoupen: {shooter.buyback === "yes" ? "Ne" : "Ano"}</p>
               </div>
@@ -97,7 +97,7 @@ function App() {
             <ul>
               {nextShooters.map((player, i) => (
                 <li key={i} className="next-shooter-item">
-                  {player.name} (kope na: {player.side})
+                  {player.name} (branka: {player.side})
                 </li>
               ))}
             </ul>
