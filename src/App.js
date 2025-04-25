@@ -85,7 +85,7 @@ function App() {
             {currentShooters.map((shooter, i) => (
               <div className="shooter" key={i}>
                 <p>
-                  <strong>{shooter.number}-{shooter.name}</strong> branka: {shooter.side})
+                  <strong>Č.{shooter.number} - {shooter.name}</strong> branka: {shooter.side})
                 </p>
                 <p>Vykoupen: {shooter.buyback === "yes" ? "Ne" : "Ano"}</p>
               </div>
@@ -98,7 +98,7 @@ function App() {
             <ul>
               {nextShooters.map((player, i) => (
                 <li key={i} className="next-shooter-item">
-                  {player.name} (branka: {player.side})
+                  Č.{shooter.number} - {player.name} (branka: {player.side})
                 </li>
               ))}
             </ul>
