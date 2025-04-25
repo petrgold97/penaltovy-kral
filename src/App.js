@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const YOUTUBE_EMBED_URL = "https://www.youtube.com/embed/fqEoVf3k_bk"; // Use embed format
+const YOUTUBE_EMBED_URL = "https://www.youtube.com/embed/fqEoVf3k_bk"; // ✅ Proper embed URL
 const GOOGLE_SHEET_API = "https://opensheet.elk.sh/1MP-9NStIwl3CWiK9MKrf9uHs9I1zTVjgCNFd1hVIkho/Sheet1";
 
 function App() {
@@ -9,65 +9,56 @@ function App() {
   const [nextShooters, setNextShooters] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [activeCount, setActiveCount] = useState(0);
-  const [currentRound, setCurrentRound] = useState(null);
+  const [currentRound, setCurrentRound] = useState("");
 
   useEffect(() => {
-    const fetchData = () => {
-      fetch(GOOGLE_SHEET_API)
-        .then((res) => res.json())
-        .then((entries) => {
-          if (!Array.isArray(entries)) {
-            console.error("Expected array but got:", entries);
-            return;
-          }
+    fetch(GOOGLE_SHEET_API)
+      .then((res) => res.json())
+      .then((entries) => {
+        if (!Array.isArray(entries)) {
+          console.error("Expected array but got:", entries);
+          return;
+        }
 
-          const roundRow = entries.find((e) => e.current_round);
-          if (roundRow && roundRow.current_round) {
-            setCurrentRound(roundRow.current_round);
-          }
+        // Get the current round from a row where current_round is set
+        const roundRow = entries.find((e) => e.current_round);
+        if (roundRow && roundRow.current_round) {
+          setCurrentRound(roundRow.current_round);
+        }
 
-          const mapped = entries
-            .filter((item) => item.Name)
-            .map((item) => ({
-              name: item.Name,
-              round: item.Round,
-              buyback: item.Buyback,
-              status: item.Status?.toLowerCase(),
-              side: item.Side,
-              missed: item.Missed,
-            }));
+        const mapped = entries
+          .filter((item) => item.Name) // Only valid players
+          .map((item) => ({
+            name: item.Name,
+            round: item.Round,
+            buyback: item.Buyback,
+            status: item.Status?.toLowerCase(),
+            side: item.Side,
+            missed: item.Missed,
+          }));
 
-          setTotalCount(mapped.length);
+        setTotalCount(mapped.length);
 
-          const active = mapped.filter(
-            (e) => e.buyback?.toLowerCase() === "yes"
-          );
-          setActiveCount(active.length);
+        const active = mapped.filter((e) => e.buyback?.toLowerCase() === "yes");
+        setActiveCount(active.length);
 
-          const current = mapped.filter((e) => e.status === "shooting");
-          setCurrentShooters(current.slice(0, 2));
+        const current = mapped.filter((e) => e.status === "shooting");
+        setCurrentShooters(current.slice(0, 2));
 
-          const next = mapped.filter((e) => e.status === "next");
-          setNextShooters(next.slice(0, 4));
-        })
-        .catch((err) => {
-          console.error("Fetch error:", err);
-        });
-    };
-
-    fetchData(); // Initial load
-    const interval = setInterval(fetchData, 5000); // Refresh every 5 sec
-    return () => clearInterval(interval); // Clean up
+        const next = mapped.filter((e) => e.status === "next");
+        setNextShooters(next.slice(0, 4));
+      })
+      .catch((err) => {
+        console.error("Fetch error:", err);
+      });
   }, []);
 
   return (
     <div className="app">
       <div className="title">
         <h1>O penaltového krále MS kraje, 16. ročník, Hukvaldy</h1>
-        <p>
-          Celkový počet kopajích: {totalCount}, ve hře: {activeCount}
-        </p>
-        {currentRound && <p>Aktuální kolo: {currentRound}</p>}
+        <p>Celkový počet kopajích: {totalCount}, ve hře: {activeCount}</p>
+        <h2>Aktuální kolo: {currentRound}</h2>
       </div>
 
       <div className="layout">
@@ -78,17 +69,6 @@ function App() {
             frameBorder="0"
             allowFullScreen
           ></iframe>
-
-          {/* Sponsors carousel below the video */}
-          <div className="sponsors">
-            <h2>Sponzoři</h2>
-            <div className="sponsor-carousel">
-              <img src="/sponsors/sponsor1.png" alt="Sponsor 1" />
-              <img src="/sponsors/sponsor2.png" alt="Sponsor 2" />
-              <img src="/sponsors/sponsor3.png" alt="Sponsor 3" />
-              <img src="/sponsors/sponsor4.png" alt="Sponsor 4" />
-            </div>
-          </div>
         </div>
 
         <div className="info">
@@ -97,9 +77,7 @@ function App() {
             {currentShooters.length === 0 && <p>Žádní aktuální hráči</p>}
             {currentShooters.map((shooter, i) => (
               <div className="shooter" key={i}>
-                <p>
-                  <strong>{shooter.name}</strong> (kope na: {shooter.side})
-                </p>
+                <p><strong>{shooter.name}</strong> (kope na: {shooter.side})</p>
                 <p>Vykoupen: {shooter.buyback === "yes" ? "Ne" : "Ano"}</p>
               </div>
             ))}
@@ -115,6 +93,17 @@ function App() {
                 </li>
               ))}
             </ul>
+          </div>
+
+          <div className="sponsors">
+            <h2>Sponzoři</h2>
+            <div className="static-sponsors">
+              <p>Sponsor 1</p>
+              <p>Sponsor 2</p>
+              <p>Sponsor 3</p>
+              <p>Sponsor 4</p>
+              <p>Sponsor 5</p>
+            </div>
           </div>
         </div>
       </div>
