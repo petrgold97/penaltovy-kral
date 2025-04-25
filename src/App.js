@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const YOUTUBE_EMBED_URL = "https://www.youtube.com/embed/fqEoVf3k_bk"; // ✅ Proper embed URL
+const YOUTUBE_EMBED_URL = "https://www.youtube.com/embed/fqEoVf3k_bk";
 const GOOGLE_SHEET_API = "https://opensheet.elk.sh/1MP-9NStIwl3CWiK9MKrf9uHs9I1zTVjgCNFd1hVIkho/Sheet1";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
   const [activeCount, setActiveCount] = useState(0);
   const [currentRound, setCurrentRound] = useState("");
 
-  useEffect(() => {
+  const fetchData = () => {
     fetch(GOOGLE_SHEET_API)
       .then((res) => res.json())
       .then((entries) => {
@@ -20,14 +20,13 @@ function App() {
           return;
         }
 
-        // Get the current round from a row where current_round is set
         const roundRow = entries.find((e) => e.current_round);
         if (roundRow && roundRow.current_round) {
           setCurrentRound(roundRow.current_round);
         }
 
         const mapped = entries
-          .filter((item) => item.Name) // Only valid players
+          .filter((item) => item.Name)
           .map((item) => ({
             name: item.Name,
             round: item.Round,
@@ -51,6 +50,12 @@ function App() {
       .catch((err) => {
         console.error("Fetch error:", err);
       });
+  };
+
+  useEffect(() => {
+    fetchData();
+    const interval = setInterval(fetchData, 5000); // 🔁 Every 5 seconds
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -85,25 +90,25 @@ function App() {
 
           <div className="next-shooters">
             <h2>Připraví se</h2>
-            {nextShooters.length === 0 && <p>Žádní další hráči</p>}
-            <ul>
+            <div className="names">
+              {nextShooters.length === 0 && <p>Žádní další hráči</p>}
               {nextShooters.map((player, i) => (
-                <li key={i}>
+                <span key={i}>
                   {player.name} (kope na: {player.side})
-                </li>
+                </span>
               ))}
-            </ul>
-          </div>
-
-          <div className="sponsors">
-            <h2>Sponzoři</h2>
-            <div className="static-sponsors">
-              <p>Sponsor 1</p>
-              <p>Sponsor 2</p>
-              <p>Sponsor 3</p>
-              <p>Sponsor 4</p>
-              <p>Sponsor 5</p>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="sponsors-carousel">
+        <h2>Sponzoři</h2>
+        <div className="carousel">
+          <div className="carousel-track">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <img key={i} src={`/sponsor${i}.png`} alt={`Sponsor ${i}`} />
+            ))}
           </div>
         </div>
       </div>
