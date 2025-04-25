@@ -14,6 +14,7 @@
   align-items: flex-start;
 }
 
+/* 👇 Make video and info equal width */
 .livestream {
   flex: 1;
 }
@@ -32,8 +33,7 @@
   gap: 20px;
 }
 
-.current-shooters,
-.next-shooters {
+.current-shooters, .next-shooters, .sponsors {
   background: #f0f0f0;
   padding: 10px;
   border-radius: 12px;
@@ -43,41 +43,12 @@
   margin-bottom: 10px;
 }
 
-.next-shooters ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 0;
+/* ❌ Remove sponsor carousel styles */
+.carousel {
+  display: none;
 }
 
-.next-shooters li {
-  padding: 4px 0;
-  font-size: 1.1rem;
-}
-
-/* Sponsors carousel */
-.sponsors {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.sponsor-carousel {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 10px;
-  background: #f0f0f0;
-  border-radius: 12px;
-}
-
-.sponsor-carousel img {
-  height: 60px;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.sponsor-carousel img:hover {
-  transform: scale(1.1);
+@keyframes rotateSponsors {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
 }
