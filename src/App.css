@@ -1,77 +1,95 @@
+/* Global Styles */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(to bottom, #f9f9f9, #eaeaea);
-  overflow-x: hidden;
+  background-color: #f8f9fa;
 }
 
 .app {
-  padding: 20px 40px;
+  padding: 20px;
   max-width: 100%;
   margin: 0 auto;
+  font-family: 'Arial', sans-serif;
 }
 
+/* Title Section */
 .title {
   text-align: center;
   margin-bottom: 30px;
+  font-size: 1.2rem;
 }
 
 h1 {
-  font-size: 3em;
-  color: #222;
-  margin: 0;
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #2d2d2d;
+  margin-bottom: 5px;
 }
 
 h2 {
-  font-size: 1.8em;
-  margin-top: 10px;
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #007bff;
 }
 
 p {
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: #555;
 }
 
-/* Layout */
+/* Layout: Livestream left, info right */
 .layout {
   display: flex;
-  gap: 40px;
-  justify-content: space-between;
+  gap: 20px;
   align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .livestream {
-  flex: 0 0 75%;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-  border-radius: 12px;
-  overflow: hidden;
+  flex: 0 0 70%;
+  max-width: 70%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .livestream iframe {
   width: 100%;
-  height: 900px;
-  border: none;
+  height: 500px;
+  border-radius: 12px;
 }
 
 .info {
-  flex: 0 0 23%;
+  flex: 0 0 28%;
   display: flex;
   flex-direction: column;
   gap: 30px;
-  text-align: center;
+  max-width: 28%;
 }
 
+/* Cards for Current and Next Shooters */
 .current-shooters,
 .next-shooters {
   background: #ffffff;
   padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
 }
 
 .shooter {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  padding: 5px;
+}
+
+.shooter p {
+  font-size: 1.1em;
 }
 
 .next-shooters ul {
@@ -81,55 +99,49 @@ p {
 }
 
 .next-shooter-item {
-  font-size: 1.3em;
-  padding: 12px 0;
-  border-bottom: 1px solid #ddd;
+  padding: 12px;
+  font-size: 1.1rem;
+  color: #333;
   transition: background-color 0.3s ease;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .next-shooter-item:hover {
-  background-color: #f0f0f0;
+  background-color: #f1f1f1;
 }
 
-/* Sponsors */
 .sponsors {
-  margin-top: 60px;
+  margin-top: 40px;
   text-align: center;
 }
 
 .carousel {
   overflow: hidden;
+  position: relative;
   width: 100%;
   max-width: 1000px;
-  margin: 0 auto;
-  position: relative;
+  margin: 30px auto;
 }
 
 .carousel-track {
   display: flex;
-  animation: scroll 20s linear infinite;
+  animation: scroll 15s linear infinite;
 }
 
 .carousel img {
-  width: 300px;
-  height: 300px;
-  object-fit: contain;
-  margin: 0 20px;
+  width: 250px;
+  height: 250px;
+  border-radius: 15px;
+  object-fit: cover;
   flex-shrink: 0;
-  border-radius: 16px;
-  transition: transform 0.3s ease;
+  margin: 0 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .carousel img:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Animate 3 sponsor scroll */
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
+/* Slide*
