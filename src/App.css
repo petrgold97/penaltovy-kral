@@ -14,7 +14,6 @@
   align-items: flex-start;
 }
 
-/* 👇 Make video and info equal width */
 .livestream {
   flex: 1;
 }
@@ -33,7 +32,8 @@
   gap: 20px;
 }
 
-.current-shooters, .next-shooters, .sponsors {
+.current-shooters,
+.next-shooters {
   background: #f0f0f0;
   padding: 10px;
   border-radius: 12px;
@@ -43,12 +43,43 @@
   margin-bottom: 10px;
 }
 
-/* ❌ Remove sponsor carousel styles */
-.carousel {
-  display: none;
+.next-shooters .names {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-@keyframes rotateSponsors {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-100%); }
+.sponsors-carousel {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.carousel {
+  overflow: hidden;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.carousel-track {
+  display: flex;
+  animation: scroll 20s linear infinite;
+}
+
+.carousel-track img {
+  width: 200px;
+  height: auto;
+  margin: 0 10px;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-120%);
+  }
 }
