@@ -16,14 +16,16 @@ body {
 /* Title Section */
 .title {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
-  position: relative;
+  flex-wrap: wrap;
 }
 
-.title .logo {
-  margin-right: 10px;
+.title-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .title .logo img {
@@ -36,13 +38,10 @@ body {
   font-weight: bold;
   color: #333;
   margin: 0;
+  white-space: nowrap;
 }
 
 .title-info {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
