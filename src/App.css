@@ -16,7 +16,7 @@ body {
 /* Title Section */
 .title {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
 }
@@ -26,11 +26,11 @@ h1 {
   font-weight: bold;
   color: #333;
   margin-bottom: 10px;
-  width: 100%; /* Ensures the title stays on its line */
 }
 
 .title-info {
   display: flex;
+  justify-content: center;
   gap: 20px;
 }
 
@@ -43,8 +43,6 @@ p {
   font-size: 1.1em;
   color: #666;
 }
-
-
 
 /* Layout: Livestream left big, info right small */
 .layout {
