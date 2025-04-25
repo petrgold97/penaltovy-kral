@@ -88,11 +88,6 @@ p {
   transition: background-color 0.3s ease;
 }
 
-.next-shooter-item:hover {
-  background-color: #e0e0e0;
-  cursor: pointer;
-}
-
 /* Sponsors Section */
 .sponsors {
   margin-top: 40px;
@@ -134,44 +129,5 @@ p {
   }
   100% {
     transform: translateX(-33.33%);
-  }
-}
-
-/* Responsiveness for smaller screens */
-@media screen and (max-width: 768px) {
-  .livestream iframe {
-    height: 250px;
-  }
-
-  .layout {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .info {
-    max-width: 100%;
-  }
-
-  .carousel {
-    max-width: 90%;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  h1 {
-    font-size: 1.8em;
-  }
-
-  h2 {
-    font-size: 1.2em;
-  }
-
-  p {
-    font-size: 1em;
-  }
-
-  .carousel img {
-    width: 150px;
-    height: 150px;
   }
 }
