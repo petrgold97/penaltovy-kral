@@ -52,7 +52,7 @@ p {
 
 .livestream iframe {
   width: 100%;
-  height: 400px;
+  height: 600px; /* Increased height */
   border-radius: 12px;
 }
 
@@ -113,10 +113,10 @@ p {
 }
 
 .carousel img {
-  width: 200px;
-  height: 200px;
-  border-radius: 12px;
-  object-fit: cover;
+  width: 220px;
+  height: 220px;
+  max-width: 100%;  /* Ensures they don't overflow */
+  object-fit: contain; /* Maintains aspect ratio */
   flex-shrink: 0;
   margin: 0 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
