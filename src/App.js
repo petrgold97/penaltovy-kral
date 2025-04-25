@@ -37,7 +37,7 @@ function App() {
         setTotalCount(mapped.length);
 
         const active = mapped.filter(
-          (e) => e.buyback?.toLowerCase() === "yes"
+          (e) => e.status !== "done"
         );
         setActiveCount(active.length);
 
