@@ -109,4 +109,15 @@ function App() {
           <div className="carousel-track">
             <img src="/sponsor1.png" alt="Sponsor 1" />
             <img src="/sponsor2.png" alt="Sponsor 2" />
-            <img src="/sponsor3.png" alt="Sponsor
+            <img src="/sponsor3.png" alt="Sponsor 3" />
+            <img src="/sponsor1.png" alt="Sponsor 1 duplicate" />
+            <img src="/sponsor2.png" alt="Sponsor 2 duplicate" />
+            <img src="/sponsor3.png" alt="Sponsor 3 duplicate" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
