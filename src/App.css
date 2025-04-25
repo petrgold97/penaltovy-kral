@@ -15,7 +15,9 @@ body {
 
 /* Title Section */
 .title {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 }
 
@@ -35,6 +37,7 @@ p {
   font-size: 1.1em;
   color: #666;
 }
+
 
 /* Layout: Livestream left big, info right small */
 .layout {
@@ -108,8 +111,8 @@ p {
 }
 
 .carousel img {
-  width: 220px;
-  height: 220px;
+  width: 180px;
+  height: 180px;
   max-width: 100%;  /* Ensures they don't overflow */
   object-fit: contain; /* Maintains aspect ratio */
   flex-shrink: 0;
