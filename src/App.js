@@ -18,15 +18,10 @@ function App() {
         const res = await fetch(GOOGLE_SHEET_API);
         const entries = await res.json();
 
-        if (!Array.isArray(entries)) {
-          console.error("Expected array but got:", entries);
-          return;
-        }
+        if (!Array.isArray(entries)) return;
 
         const roundRow = entries.find((e) => e.current_round);
-        if (roundRow?.current_round) {
-          setCurrentRound(roundRow.current_round);
-        }
+        if (roundRow?.current_round) setCurrentRound(roundRow.current_round);
 
         const mapped = entries
           .filter((item) => item.Name)
