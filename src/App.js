@@ -63,7 +63,7 @@ function App() {
       <div className="title">
         <h1>O penaltového krále MS kraje, 16. ročník, Hukvaldy</h1>
         <div className="title-info">
-          <p>Celkový počet kopajích: {totalCount}, ve hře: {activeCount}</p>
+          <h2>Celkový počet kopajích: {totalCount}, ve hře: {activeCount}</h2>
           <h2>Aktuální kolo: {currentRound}</h2>
         </div>
       </div>
