@@ -60,7 +60,7 @@ function App() {
     <div className="app">
       <div className="title">
   <div className="logo">
-    <img src="/logo.png" alt="Logo" />
+    <img src="/PenaltovyKral-Logo.png" alt="Logo" />
   </div>
   <h1>O penaltového krále MS kraje 2025</h1>
   <div className="title-info">
