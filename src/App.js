@@ -103,11 +103,11 @@ function App() {
       <div className="sponsors">
         <h2>Sponzoři</h2>
         <div className="carousel">
-          <img src="/public/sponsor1.png" />
-          <img src="/public/sponsor2.png" />
-          <img src="/public/sponsor3.png" />
-          <img src="/public/sponsor4.png" />
-          <img src="/public/sponsor5.png" />
+          <img src="/public/sponsor1.png alt="Sponsor 1" />
+          <img src="/public/sponsor2.png alt="Sponsor 2" />
+          <img src="/public/sponsor3.png alt="Sponsor 3" />
+          <img src="/public/sponsor4.png alt="Sponsor 4" />
+          <img src="/public/sponsor5.png alt="Sponsor 5" />
         </div>
       </div>
     </div>
