@@ -53,7 +53,11 @@ function App() {
       }
     }
 
-    fetchData();
+    fetchData(); // Fetch data initially
+
+    const intervalId = setInterval(fetchData, 3000); // Refresh data every 3 seconds
+
+    return () => clearInterval(intervalId); // Cleanup interval when component unmounts
   }, []);
 
   return (
