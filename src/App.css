@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
+  background-color: #fafafa;
   color: #333;
 }
 
@@ -18,25 +18,25 @@ body {
 .title {
   text-align: center;
   margin-bottom: 30px;
-  background-color: #007bff;
+  background-color: #1e3d58;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
   color: white;
 }
 
 h1 {
   font-size: 2.5em;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 h2 {
-  font-size: 1.5em;
+  font-size: 1.6em;
   margin: 5px 0;
 }
 
 p {
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: #fff;
 }
 
@@ -56,7 +56,7 @@ p {
 .livestream iframe {
   width: 100%;
   height: 450px;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -65,11 +65,11 @@ p {
   max-width: 28%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
   text-align: center;
   background: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 25px;
+  border-radius: 12px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -81,11 +81,11 @@ p {
 }
 
 .shooter, .next-shooter-item {
-  padding: 10px;
-  margin-bottom: 15px;
-  font-size: 1.1em;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-size: 1.2em;
   border: 1px solid #ddd;
-  border-radius: 6px;
+  border-radius: 8px;
   transition: background-color 0.3s ease;
 }
 
@@ -100,7 +100,7 @@ p {
 
 /* Sponsors Section */
 .sponsors {
-  margin-top: 40px;
+  margin-top: 50px;
   text-align: center;
 }
 
@@ -118,9 +118,9 @@ p {
 }
 
 .carousel img {
-  width: 200px;
-  height: 200px;
-  border-radius: 10px;
+  width: 220px;
+  height: 220px;
+  border-radius: 12px;
   object-fit: cover;
   margin: 0 15px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -144,7 +144,7 @@ p {
 /* Responsive adjustments for small screens */
 @media screen and (max-width: 768px) {
   .livestream iframe {
-    height: 300px;
+    height: 350px;
   }
 
   .layout {
@@ -167,12 +167,12 @@ p {
   }
 
   h2 {
-    font-size: 1.3em;
+    font-size: 1.4em;
   }
 
   .carousel img {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
   }
 
   p {
