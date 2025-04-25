@@ -32,8 +32,7 @@
   gap: 20px;
 }
 
-.current-shooters,
-.next-shooters {
+.current-shooters, .next-shooters {
   background: #f0f0f0;
   padding: 10px;
   border-radius: 12px;
@@ -43,43 +42,29 @@
   margin-bottom: 10px;
 }
 
-.next-shooters .names {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.next-shooters ul {
+  list-style: none; /* ❌ Remove bullets */
+  padding: 0;
+  margin: 0;
 }
 
-.sponsors-carousel {
-  text-align: center;
+.sponsors {
   margin-top: 40px;
+  text-align: center;
 }
 
 .carousel {
-  overflow: hidden;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.carousel-track {
   display: flex;
-  animation: scroll 20s linear infinite;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px 0;
+  justify-content: center;
 }
 
-.carousel-track img {
-  width: 200px;
+.carousel img {
+  width: 150px;
   height: auto;
-  margin: 0 10px;
-  border-radius: 8px;
-  object-fit: contain;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-120%);
-  }
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
 }
