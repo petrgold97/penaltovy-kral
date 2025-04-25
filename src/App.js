@@ -91,7 +91,7 @@ function App() {
             {nextShooters.length === 0 && <p>Žádní další hráči</p>}
             <ul>
               {nextShooters.map((player, i) => (
-                <li key={i}>
+                <li key={i} className="next-shooter-item">
                   {player.name} (kope na: {player.side})
                 </li>
               ))}
@@ -103,11 +103,11 @@ function App() {
       <div className="sponsors">
         <h2>Sponzoři</h2>
         <div className="carousel">
-          <img src="/public/sponsor1.png" alt="Sponsor 1" />
-          <img src="/public/sponsor2.png" alt="Sponsor 2" />
-          <img src="/public/sponsor3.png" alt="Sponsor 3" />
-          <img src="/public/sponsor4.png" alt="Sponsor 4" />
-          <img src="/public/sponsor5.png" alt="Sponsor 5" />
+          <img src="/sponsor1.png" alt="Sponsor 1" />
+          <img src="/sponsor2.png" alt="Sponsor 2" />
+          <img src="/sponsor3.png" alt="Sponsor 3" />
+          <img src="/sponsor4.png" alt="Sponsor 4" />
+          <img src="/sponsor5.png" alt="Sponsor 5" />
         </div>
       </div>
     </div>
