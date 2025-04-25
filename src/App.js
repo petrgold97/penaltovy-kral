@@ -103,11 +103,11 @@ function App() {
       <div className="sponsors">
         <h2>Sponzoři</h2>
         <div className="carousel">
-          <img src="https://via.placeholder.com/150?text=Sponsor+1" alt="Sponsor 1" />
-          <img src="https://via.placeholder.com/150?text=Sponsor+2" alt="Sponsor 2" />
-          <img src="https://via.placeholder.com/150?text=Sponsor+3" alt="Sponsor 3" />
-          <img src="https://via.placeholder.com/150?text=Sponsor+4" alt="Sponsor 4" />
-          <img src="https://via.placeholder.com/150?text=Sponsor+5" alt="Sponsor 5" />
+          <img src="/public/sponsor1.png" />
+          <img src="/public/sponsor2.png" />
+          <img src="/public/sponsor3.png" />
+          <img src="/public/sponsor4.png" />
+          <img src="/public/sponsor5.png" />
         </div>
       </div>
     </div>
