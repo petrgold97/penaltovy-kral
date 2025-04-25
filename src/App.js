@@ -59,18 +59,20 @@ function App() {
   return (
     <div className="app">
       <div className="title">
-        <div className="logo">
-          <img src="/PenaltovyKral-Logo.png" alt="Logo" />
-        </div>
-        <h1>O penaltového krále MS kraje 2025</h1>
-        <div className="logo">
-          <img src="/PenaltovyKral-Logo.png" alt="Logo" />
+        <div className="title-left">
+          <div className="logo">
+            <img src="/PenaltovyKral-Logo.png" alt="Logo" />
+          </div>
+          <h1>O penaltového krále MS kraje 2025  </h1>
+          <div className="logo">
+            <img src="/PenaltovyKral-Logo.png" alt="Logo" />
+          </div>
         </div>
         <div className="title-info">
           <h2>Celkový počet kopajích: {totalCount}, ve hře: {activeCount}</h2>
           <h2>Aktuální kolo: {currentRound}</h2>
         </div>
-    </div>
+      </div>
 
       <div className="layout">
         <div className="livestream">
