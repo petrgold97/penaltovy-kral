@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 const YOUTUBE_EMBED_URL = "https://www.youtube.com/embed/fqEoVf3k_bk";
-const GOOGLE_SHEET_API = "https://opensheet.elk.sh/1MP-9NStIwl3CWiK9MKrf9uHs9I1zTVjgCNFd1hVIkho/Sheet1";
+const GOOGLE_SHEET_API =
+  "https://opensheet.elk.sh/1MP-9NStIwl3CWiK9MKrf9uHs9I1zTVjgCNFd1hVIkho/Sheet1";
 
 function App() {
   const [currentShooters, setCurrentShooters] = useState([]);
@@ -109,8 +110,9 @@ function App() {
             <img src="/sponsor1.png" alt="Sponsor 1" />
             <img src="/sponsor2.png" alt="Sponsor 2" />
             <img src="/sponsor3.png" alt="Sponsor 3" />
-            <img src="/sponsor4.png" alt="Sponsor 4" />
-            <img src="/sponsor5.png" alt="Sponsor 5" />
+            <img src="/sponsor1.png" alt="Sponsor 1 duplicate" />
+            <img src="/sponsor2.png" alt="Sponsor 2 duplicate" />
+            <img src="/sponsor3.png" alt="Sponsor 3 duplicate" />
           </div>
         </div>
       </div>
