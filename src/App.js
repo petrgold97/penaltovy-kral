@@ -31,6 +31,7 @@ function App() {
             status: item.Status?.toLowerCase(),
             side: item.Side,
             missed: item.Missed,
+            number: item.Number,
           }));
 
         setTotalCount(mapped.length);
