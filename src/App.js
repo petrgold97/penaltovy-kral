@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const YOUTUBE_EMBED_URL = "https://youtu.be/fqEoVf3k_bk?si=P3Kno0-c-yoL-P8E";
+const YOUTUBE_EMBED_URL = "https://www.youtube.com/embed/fqEoVf3k_bk?si=n1BsG03gCMFh-y2D";
 const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbyIQXUr5qMOYEHo_dcURbLEn-6ywZMaeyFSpT88G1xTTvqCvRGQbu1996iWAOEYVNnHzw/exec";
 
 function App() {
