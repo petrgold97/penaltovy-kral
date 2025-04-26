@@ -45,7 +45,7 @@ function App() {
         setCurrentShooters(current.slice(0, 2));
 
         const next = mapped.filter((e) => e.status === "next");
-        setNextShooters(next.slice(0, 4));
+        setNextShooters(next.slice(0, 6));
       } catch (err) {
         console.error("Fetch error:", err);
       }
