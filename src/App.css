@@ -2,9 +2,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', 'Arial', sans-serif;
-  background-color: #f5f7fa;
-  color: #333;
+  font-family: 'Arial', sans-serif;
+  background-color: #fafafa;
 }
 
 .app {
@@ -30,8 +29,8 @@ body {
 
 .title h1 {
   font-size: 2em;
-  font-weight: 700;
-  color: #222;
+  font-weight: bold;
+  color: #333;
   margin: 0;
 }
 
@@ -49,9 +48,8 @@ body {
 }
 
 .title-info h2 {
-  font-size: 1.1em;
-  font-weight: 500;
-  color: #666;
+  font-size: 1.2em;
+  color: #444;
   margin: 0;
 }
 
@@ -73,11 +71,8 @@ body {
   width: 100%;
   height: 800px;
   border-radius: 12px;
-  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.08);
-  border: none;
 }
 
-/* Info Section */
 .info {
   flex: 1;
   max-width: 28%;
@@ -87,36 +82,33 @@ body {
   text-align: center;
 }
 
+/* Info Boxes */
 .current-shooters,
 .next-shooters,
 .sponsors {
-  background: #ffffff;
-  padding: 20px;
+  background: #f0f0f0;
+  padding: 15px;
   border-radius: 12px;
-  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.05);
 }
 
+/* Only underline the titles */
 .current-shooters h2,
 .next-shooters h2,
 .sponsors h2 {
   font-size: 1.3em;
   margin-bottom: 12px;
   color: #222;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 8px;
+  display: inline-block;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
 }
 
+/* Shooter Styles */
 .shooter {
   margin-bottom: 15px;
 }
 
-.shooter p {
-  margin: 4px 0;
-  font-size: 1em;
-  color: #555;
-}
-
-/* Next Shooters */
+/* List of next shooters */
 .next-shooters ul {
   list-style: none;
   padding: 0;
@@ -127,7 +119,7 @@ body {
   padding: 10px 0;
   font-size: 1.1em;
   color: #444;
-  border-bottom: 1px solid #eee;
+  border: none; /* No underline or border */
 }
 
 /* Sponsors Section */
