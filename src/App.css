@@ -22,10 +22,6 @@ body {
   position: relative;
 }
 
-.title .logo {
-  margin-right: 10px;
-}
-
 .title .logo img {
   width: 100px;
   height: auto;
@@ -39,14 +35,16 @@ body {
 }
 
 .title-info {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 5px;
+    align-items: center;          /* Center items horizontally */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: absolute;
+    right: 5%;                  /* Adds space from the right edge of the container */ 
+    top: 50%;
+    transform: translateY(-50%);  /* Vertical centering */
+    justify-content: center;      /* Center the content vertically in the container */
+    text-align: center;           /* Center the text inside the h2 elements */
 }
 
 .title-info h2 {
