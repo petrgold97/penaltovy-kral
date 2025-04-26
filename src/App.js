@@ -91,7 +91,7 @@ function App() {
                 <p>
                   <strong>Č.{shooter.number} - {shooter.name}(Branka: {shooter.side})</strong>
                 </p>
-                <p>Vykoupen: {shooter.buyback === "yes" ? "Ne" : "Ano"}</p>
+                <p>Vykoupen: {shooter.buyback === "yes" ? "Ano" : "Ne"}</p>
               </div>
             ))}
           </div>
