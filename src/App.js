@@ -85,7 +85,7 @@ function App() {
         <div className="info">
           <div className="current-shooters">
             <h2>Aktuálně kope</h2>
-            {currentShooters.length === 0 && <p>Žádní aktuální hráči</p>}
+            {currentShooters.length === 0 && <p>Žádní aktuální hráči, přestávka</p>}
             {currentShooters.map((shooter, i) => (
               <div className="shooter" key={i}>
                 <p>
