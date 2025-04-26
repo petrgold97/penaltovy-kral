@@ -59,21 +59,18 @@ function App() {
   return (
     <div className="app">
       <div className="title">
-        <div className="title-row">
-          <div className="logo">
-            <img src="/PenaltovyKral-Logo.png" alt="Logo" />
-          </div>
-          <h1>O penaltového krále MS kraje 2025</h1>
-          <div className="logo">
-            <img src="/PenaltovyKral-Logo.png" alt="Logo" />
-          </div>
+        <div className="logo">
+          <img src="/PenaltovyKral-Logo.png" alt="Logo" />
         </div>
-
+        <h1>O penaltového krále MS kraje 2025</h1>
+        <div className="logo">
+          <img src="/PenaltovyKral-Logo.png" alt="Logo" />
+        </div>
         <div className="title-info">
           <h2>Celkový počet kopajích: {totalCount}, ve hře: {activeCount}</h2>
           <h2>Aktuální kolo: {currentRound}</h2>
         </div>
-      </div>
+    </div>
 
       <div className="layout">
         <div className="livestream">
@@ -92,7 +89,7 @@ function App() {
             {currentShooters.map((shooter, i) => (
               <div className="shooter" key={i}>
                 <p>
-                  <strong>Č.{shooter.number} - {shooter.name}</strong> (branka: {shooter.side})
+                  <strong>Č.{shooter.number} - {shooter.name}</strong> branka: {shooter.side})
                 </p>
                 <p>Vykoupen: {shooter.buyback === "yes" ? "Ne" : "Ano"}</p>
               </div>
