@@ -62,7 +62,7 @@ function App() {
         <div className="logo">
           <img src="/PenaltovyKral-Logo.png" alt="Logo" />
         </div>
-        <h1>O penaltového krále MS kraje 2025</h1>
+        <h1>O Penaltového krále MS kraje 2025</h1>
         <div className="logo">
           <img src="/PenaltovyKral-Logo.png" alt="Logo" />
         </div>
@@ -89,7 +89,7 @@ function App() {
             {currentShooters.map((shooter, i) => (
               <div className="shooter" key={i}>
                 <p>
-                  <strong>Č.{shooter.number} - {shooter.name}</strong> branka: {shooter.side})
+                  <strong>Č.{shooter.number} - {shooter.name}(Branka: {shooter.side})</strong>
                 </p>
                 <p>Vykoupen: {shooter.buyback === "yes" ? "Ne" : "Ano"}</p>
               </div>
@@ -102,7 +102,7 @@ function App() {
             <ul>
               {nextShooters.map((player, i) => (
                 <li key={i} className="next-shooter-item">
-                  Č.{player.number} - {player.name} (branka: {player.side})
+                  Č.{player.number} - {player.name} (Branka: {player.side})
                 </li>
               ))}
             </ul>
