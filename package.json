@@ -30,9 +30,6 @@
       "not dead",
       "not op_mini all"
     ],
-    "engines": {
-      "node": "18.17.1"
-    },
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
