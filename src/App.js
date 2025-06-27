@@ -89,7 +89,7 @@ function App() {
             {currentShooters.map((shooter, i) => (
               <div className="shooter" key={i}>
                 <p>
-                  <strong>Č.{shooter.number} - {shooter.name} (Branka: {shooter.side})</strong>
+                  <strong>Č.{shooter.number} - {shooter.name} ({shooter.side})</strong>
                 </p>
                 <p>Vykoupen: {shooter.buyback === "yes" ? "Ano" : "Ne"}</p>
               </div>
