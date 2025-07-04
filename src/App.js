@@ -36,16 +36,21 @@ function App() {
 
         setTotalCount(mapped.length);
 
-        const active = mapped.filter(
-          (e) => e.status !== "done"
-        );
+        const active = mapped.filter((e) => e.status !== "done");
         setActiveCount(active.length);
 
-        const current = mapped.filter((e) => e.status === "shooting");
-        setCurrentShooters(current.slice(0, 2));
+        // Find in original order those marked as "shooting" or "next"
+        const combined = mapped.filter(
+          (e) => e.status === "shooting" || e.status === "next"
+        );
 
-        const next = mapped.filter((e) => e.status === "next");
-        setNextShooters(next.slice(0, 6));
+        const shooting = combined.filter((e) => e.status === "shooting").slice(0, 2);
+        setCurrentShooters(shooting);
+
+        // Remove current shooters from the combined list for next shooters
+        const shootingIds = new Set(shooting.map((s) => s.number));
+        const next = combined.filter((e) => !shootingIds.has(e.number)).slice(0, 6);
+        setNextShooters(next);
       } catch (err) {
         console.error("Fetch error:", err);
       }
@@ -70,7 +75,7 @@ function App() {
           <h2>Celkový počet kopajích: {totalCount}, ve hře: {activeCount}</h2>
           <h2>Aktuální kolo: {currentRound}</h2>
         </div>
-    </div>
+      </div>
 
       <div className="layout">
         <div className="livestream">
