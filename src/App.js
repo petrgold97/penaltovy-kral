@@ -93,33 +93,16 @@ function App() {
 
         <div className="sponsors">
           <h2>Sponzoři</h2>
-          <div className="carousel">
-            <div className="carousel-track">
-              <img src="/1.png" alt="1.png" />
-              <img src="/2.png" alt="2.png" />
-              <img src="/3.jpg" alt="3.png" />
-              <img src="/4.png" alt="4.png" />
-              <img src="/5.png" alt="5.png" />
-              <img src="/6.png" alt="6.png" />
-              <img src="/7.png" alt="7.png" />
-              <img src="/8.jpg" alt="8.png" />
-              <img src="/9.png" alt="9.png" />
-              <img src="/10.png" alt="10.png" />
-              <img src="/11.png" alt="11.png" />
-              <img src="/12.png" alt="12.png" />
-              <img src="/13.png" alt="13.png" />
-              <img src="/14.png" alt="14.png" />
-              <img src="/15.png" alt="15.png" />
-              <img src="/16.png" alt="16.png" />
-              <img src="/17.png" alt="17.png" />
-              <img src="/18.png" alt="18.png" />
-              <img src="/19.png" alt="19.png" />
-              <img src="/20.png" alt="20.png" />
-              <img src="/21.png" alt="21.png" />
-              <img src="/22.png" alt="22.png" />
-              <img src="/23.png" alt="23.png" />
-            </div>
-          </div>
+          <div className="carousel-track">
+  {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23].map(num => {
+    const ext = [3, 8].includes(num) ? 'jpg' : 'png';
+    return <img key={`img1-${num}`} src={`/${num}.${ext}`} alt={`${num}.${ext}`} />;
+  })}
+  {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23].map(num => {
+    const ext = [3, 8].includes(num) ? 'jpg' : 'png';
+    return <img key={`img2-${num}`} src={`/${num}.${ext}`} alt={`${num}.${ext}`} />;
+  })}
+</div>
         </div>
       </div>
     </div>
