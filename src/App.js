@@ -4,90 +4,88 @@ import "./App.css";
 const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbyIQXUr5qMOYEHo_dcURbLEn-6ywZMaeyFSpT88G1xTTvqCvRGQbu1996iWAOEYVNnHzw/exec";
 
 function App() {
-  const [aktualniHraci, nastavAktualniHraci] = useState([]);
-  const [dalsiHraci, nastavDalsiHraci] = useState([]);
-  const [celkovyPocet, nastavCelkovyPocet] = useState(0);
-  const [aktivniPocet, nastavAktivniPocet] = useState(0);
-  const [aktualniKolo, nastavAktualniKolo] = useState("");
+  const [currentShooters, setCurrentShooters] = useState([]);
+  const [nextShooters, setNextShooters] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
+  const [activeCount, setActiveCount] = useState(0);
+  const [currentRound, setCurrentRound] = useState("");
 
   useEffect(() => {
-    async function nactiData() {
+    async function fetchData() {
       try {
-        const odpoved = await fetch(GOOGLE_SHEET_API);
-        const zaznamy = await odpoved.json();
+        const res = await fetch(GOOGLE_SHEET_API);
+        const entries = await res.json();
 
-        const radekSKolem = zaznamy.find((z) => z.aktuální_kolo);
-        if (radekSKolem?.aktuální_kolo) {
-          nastavAktualniKolo(radekSKolem.aktuální_kolo);
+        const roundRow = entries.find((e) => e.current_round);
+        if (roundRow?.current_round) {
+          setCurrentRound(roundRow.current_round);
         }
 
-        const hraci = zaznamy
-          .filter((z) => z.Jméno)
-          .map((z) => ({
-            jmeno: z.Jméno,
-            kolo: z.Kolo,
-            vykoupen: z.Vykoupen,
-            stav: z.Stav?.toLowerCase(),
-            strana: z.Strana,
-            minul: z.Minul,
-            cislo: z["Číslo"],
+        const mapped = entries
+          .filter((item) => item.Name)
+          .map((item) => ({
+            name: item.Name,
+            round: item.Round,
+            buyback: item.Buyback,
+            status: item.Status?.toLowerCase(),
+            side: item.Side,
+            missed: item.Missed,
+            number: item.Number,
           }));
 
-        nastavCelkovyPocet(hraci.length);
+        setTotalCount(mapped.length);
 
-        const aktivniHraci = hraci.filter((h) => h.stav !== "done");
-        nastavAktivniPocet(aktivniHraci.length);
+        const active = mapped.filter((e) => e.status !== "done");
+        setActiveCount(active.length);
 
-        const relevantni = hraci.filter(
-          (h) => h.stav === "shooting" || h.stav === "next"
+        const combined = mapped.filter(
+          (e) => e.status === "shooting" || e.status === "next"
         );
 
-        const kopajici = relevantni.filter((h) => h.stav === "shooting").slice(0, 2);
-        nastavAktualniHraci(kopajici);
+        const shooting = combined.filter((e) => e.status === "shooting").slice(0, 2);
+        setCurrentShooters(shooting);
 
-        const kopajiciId = new Set(kopajici.map((h) => h.cislo));
-        const nasledujici = relevantni
-          .filter((h) => !kopajiciId.has(h.cislo))
-          .slice(0, 6);
-        nastavDalsiHraci(nasledujici);
-      } catch (chyba) {
-        console.error("Chyba při načítání dat:", chyba);
+        const shootingIds = new Set(shooting.map((s) => s.number));
+        const next = combined.filter((e) => !shootingIds.has(e.number)).slice(0, 6);
+        setNextShooters(next);
+      } catch (err) {
+        console.error("Fetch error:", err);
       }
     }
 
-    nactiData();
-    const interval = setInterval(nactiData, 3000);
-    return () => clearInterval(interval);
+    fetchData();
+    const intervalId = setInterval(fetchData, 3000);
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
     <div className="app centered">
       <div className="title-info">
-        <h2>Celkový počet kopajících: {celkovyPocet}, ve hře: {aktivniPocet}</h2>
-        <h2>Aktuální kolo: {aktualniKolo}</h2>
+        <h2>Celkový počet kopajích: {totalCount}, ve hře: {activeCount}</h2>
+        <h2>Aktuální kolo: {currentRound}</h2>
       </div>
 
       <div className="info">
         <div className="current-shooters">
           <h2>Aktuálně kope</h2>
-          {aktualniHraci.length === 0 && <p>Žádní aktuální hráči, přestávka</p>}
-          {aktualniHraci.map((hrac, i) => (
+          {currentShooters.length === 0 && <p>Žádní aktuální hráči, přestávka</p>}
+          {currentShooters.map((shooter, i) => (
             <div className="shooter" key={i}>
               <p>
-                <strong>Č.{hrac.cislo} - {hrac.jmeno} ({hrac.strana})</strong>
+                <strong>Č.{shooter.number} - {shooter.name} ({shooter.side})</strong>
               </p>
-              <p>Vykoupen: {hrac.vykoupen === "ano" ? "Ano" : "Ne"}</p>
+              <p>Vykoupen: {shooter.buyback === "yes" ? "Ano" : "Ne"}</p>
             </div>
           ))}
         </div>
 
         <div className="next-shooters">
           <h2>Připraví se</h2>
-          {dalsiHraci.length === 0 && <p>Žádní další hráči</p>}
+          {nextShooters.length === 0 && <p>Žádní další hráči</p>}
           <ul>
-            {dalsiHraci.map((hrac, i) => (
+            {nextShooters.map((player, i) => (
               <li key={i} className="next-shooter-item">
-                Č.{hrac.cislo} - {hrac.jmeno} ({hrac.strana})
+                Č.{player.number} - {player.name} ({player.side})
               </li>
             ))}
           </ul>
