@@ -16,38 +16,38 @@ function App() {
         const odpoved = await fetch(GOOGLE_SHEET_API);
         const zaznamy = await odpoved.json();
 
-        const radekSKolem = zaznamy.find((zaznam) => zaznam.current_round);
-        if (radekSKolem?.current_round) {
-          nastavAktualniKolo(radekSKolem.current_round);
+        const radekSKolem = zaznamy.find((z) => z.aktuální_kolo);
+        if (radekSKolem?.aktuální_kolo) {
+          nastavAktualniKolo(radekSKolem.aktuální_kolo);
         }
 
         const hraci = zaznamy
-          .filter((zaznam) => zaznam.Name)
-          .map((zaznam) => ({
-            jmeno: zaznam.Name,
-            kolo: zaznam.Round,
-            vykoupen: zaznam.Buyback,
-            stav: zaznam.Status?.toLowerCase(),
-            strana: zaznam.Side,
-            minut: zaznam.Missed,
-            cislo: zaznam.Number,
+          .filter((z) => z.Jméno)
+          .map((z) => ({
+            jmeno: z.Jméno,
+            kolo: z.Kolo,
+            vykoupen: z.Vykoupen,
+            stav: z.Stav?.toLowerCase(),
+            strana: z.Strana,
+            minul: z.Minul,
+            cislo: z["Číslo"],
           }));
 
         nastavCelkovyPocet(hraci.length);
 
-        const aktivniHraci = hraci.filter((hrac) => hrac.stav !== "done");
+        const aktivniHraci = hraci.filter((h) => h.stav !== "done");
         nastavAktivniPocet(aktivniHraci.length);
 
         const relevantni = hraci.filter(
-          (hrac) => hrac.stav === "shooting" || hrac.stav === "next"
+          (h) => h.stav === "shooting" || h.stav === "next"
         );
 
-        const kopajici = relevantni.filter((hrac) => hrac.stav === "shooting").slice(0, 2);
+        const kopajici = relevantni.filter((h) => h.stav === "shooting").slice(0, 2);
         nastavAktualniHraci(kopajici);
 
         const kopajiciId = new Set(kopajici.map((h) => h.cislo));
         const nasledujici = relevantni
-          .filter((hrac) => !kopajiciId.has(hrac.cislo))
+          .filter((h) => !kopajiciId.has(h.cislo))
           .slice(0, 6);
         nastavDalsiHraci(nasledujici);
       } catch (chyba) {
@@ -56,8 +56,8 @@ function App() {
     }
 
     nactiData();
-    const intervalId = setInterval(nactiData, 3000);
-    return () => clearInterval(intervalId);
+    const interval = setInterval(nactiData, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -76,7 +76,7 @@ function App() {
               <p>
                 <strong>Č.{hrac.cislo} - {hrac.jmeno} ({hrac.strana})</strong>
               </p>
-              <p>Vykoupen: {hrac.vykoupen === "yes" ? "Ano" : "Ne"}</p>
+              <p>Vykoupen: {hrac.vykoupen === "ano" ? "Ano" : "Ne"}</p>
             </div>
           ))}
         </div>
