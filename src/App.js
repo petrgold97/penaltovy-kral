@@ -24,13 +24,13 @@ function App() {
         const mapped = entries
           .filter((item) => item.Name)
           .map((item) => ({
-            name: item.Name,
-            round: item.Round,
-            buyback: item.Buyback,
+            name: item.jmeno,
+            round: item.kolo,
+            buyback: item.vykoupeni,
             status: item.Status?.toLowerCase(),
-            side: item.Side,
+            side: item.strana,
             missed: item.Missed,
-            number: item.Number,
+            number: item.cislo,
           }));
 
         setTotalCount(mapped.length);
