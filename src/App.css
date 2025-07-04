@@ -45,7 +45,7 @@
 .carousel-track {
   display: flex;
   gap: 1rem;
-  animation: scroll 15s linear infinite;
+  animation: scroll 30s linear infinite;
 }
 
 .carousel-track img {
