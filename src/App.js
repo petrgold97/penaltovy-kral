@@ -1,4 +1,4 @@
-my code import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbyIQXUr5qMOYEHo_dcURbLEn-6ywZMaeyFSpT88G1xTTvqCvRGQbu1996iWAOEYVNnHzw/exec";
