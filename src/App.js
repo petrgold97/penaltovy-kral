@@ -98,7 +98,7 @@ function App() {
               {[...Array(2)].flatMap((_, repeatIndex) =>
                 Array.from({ length: 23 }, (_, i) => {
                   const num = i + 1;
-                  const ext = [3, 8].includes(num) ? 'jpg' : 'png'; // výjimky pro .jpg
+                  const ext = [3, 8].includes(num) ? 'jpg' : 'png';
                   return (
                     <img
                       key={`${repeatIndex}-${num}`}
