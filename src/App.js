@@ -28,34 +28,25 @@ function App() {
             name: item.Name,
             round: item.Round,
             buyback: item.Buyback,
-            status: item.Status?.toLowerCase(),
             side: item.Side,
             missed: item.Missed,
             number: item.Number,
-            stillInGame: item.stale_ve_hre?.toLowerCase() === "ano", // nový sloupec
+            stillInGame: item.stale_ve_hre?.toLowerCase() === "ano",
+            shooting: item.Status?.toLowerCase() === "shooting",
+            next: item.Status?.toLowerCase() === "next",
           }));
 
         setTotalCount(mapped.length);
 
-        const active = mapped.filter(
-          (e) => e.status !== "done" && e.stillInGame
-        );
-        setActiveCount(active.length);
+        const activePlayers = mapped.filter((p) => p.stillInGame);
+        setActiveCount(activePlayers.length);
 
-        const combined = mapped.filter(
-          (e) =>
-            (e.status === "shooting" || e.status === "next") &&
-            e.stillInGame
-        );
+        const current = activePlayers.filter((p) => p.shooting).slice(0, 2);
+        setCurrentShooters(current);
 
-        const shooting = combined
-          .filter((e) => e.status === "shooting")
-          .slice(0, 2);
-        setCurrentShooters(shooting);
-
-        const shootingIds = new Set(shooting.map((s) => s.number));
-        const next = combined
-          .filter((e) => !shootingIds.has(e.number))
+        const currentIds = new Set(current.map((p) => p.number));
+        const next = activePlayers
+          .filter((p) => p.next && !currentIds.has(p.number))
           .slice(0, 6);
         setNextShooters(next);
       } catch (err) {
@@ -72,7 +63,7 @@ function App() {
     <div className="app centered">
       <div className="title-info">
         <h2>
-          Celkový počet kopajích: {totalCount}, ve hře: {activeCount}
+          Celkový počet kopajících: {totalCount}, ve hře: {activeCount}
         </h2>
         <h2>Aktuální kolo: {currentRound}</h2>
       </div>
