@@ -31,11 +31,12 @@ function App() {
             side: item.Side,
             missed: item.Missed,
             number: item.Number,
+            vehre: item.stale_ve_Hre,
           }));
 
         setTotalCount(mapped.length);
 
-        const active = mapped.filter((e) => e.status !== "done");
+        const active = mapped.filter((e) => e.vehre !== "ne");
         setActiveCount(active.length);
 
         const combined = mapped.filter(
