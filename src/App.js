@@ -31,29 +31,22 @@ function App() {
             side: item.Side,
             missed: item.Missed,
             number: item.Number,
-            stillInGame: item.stale_ve_hre?.toLowerCase() === "ano",
           }));
 
         setTotalCount(mapped.length);
 
-        // Aktivní hráči pouze ti, kteří mají stale_ve_hre === "ano"
-        const active = mapped.filter((e) => e.stillInGame);
+        const active = mapped.filter((e) => e.status !== "done");
         setActiveCount(active.length);
 
-        // Pouze aktivní hráči s relevantním status
-        const combined = active.filter(
+        const combined = mapped.filter(
           (e) => e.status === "shooting" || e.status === "next"
         );
 
-        const shooting = combined
-          .filter((e) => e.status === "shooting")
-          .slice(0, 2);
+        const shooting = combined.filter((e) => e.status === "shooting").slice(0, 2);
         setCurrentShooters(shooting);
 
         const shootingIds = new Set(shooting.map((s) => s.number));
-        const next = combined
-          .filter((e) => !shootingIds.has(e.number))
-          .slice(0, 6);
+        const next = combined.filter((e) => !shootingIds.has(e.number)).slice(0, 6);
         setNextShooters(next);
       } catch (err) {
         console.error("Fetch error:", err);
@@ -68,22 +61,18 @@ function App() {
   return (
     <div className="app centered">
       <div className="title-info">
-        <h2>Celkový počet kopajících: {totalCount}, ve hře: {activeCount}</h2>
+        <h2>Celkový počet kopajích: {totalCount}, ve hře: {activeCount}</h2>
         <h2>Aktuální kolo: {currentRound}</h2>
       </div>
 
       <div className="info">
         <div className="current-shooters">
           <h2>Aktuálně kope</h2>
-          {currentShooters.length === 0 && (
-            <p>Žádní aktuální hráči, přestávka</p>
-          )}
+          {currentShooters.length === 0 && <p>Žádní aktuální hráči, přestávka</p>}
           {currentShooters.map((shooter, i) => (
             <div className="shooter" key={i}>
               <p>
-                <strong>
-                  Č.{shooter.number} - {shooter.name} ({shooter.side})
-                </strong>
+                <strong>Č.{shooter.number} - {shooter.name} ({shooter.side})</strong>
               </p>
               <p>Vykoupen: {shooter.buyback === "yes" ? "Ano" : "Ne"}</p>
             </div>
@@ -109,7 +98,7 @@ function App() {
               {[...Array(2)].flatMap((_, repeatIndex) =>
                 Array.from({ length: 23 }, (_, i) => {
                   const num = i + 1;
-                  const ext = [3, 8].includes(num) ? "jpg" : "png";
+                  const ext = [3, 8].includes(num) ? 'jpg' : 'png';
                   return (
                     <img
                       key={`${repeatIndex}-${num}`}
